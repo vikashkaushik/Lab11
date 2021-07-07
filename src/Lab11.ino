@@ -18,11 +18,11 @@ void setup() {
   Blynk.begin("xEHyJ1ZygwI7OXGc9-eLg3KWMaR4x7l5", IPAddress(167, 172, 234, 162), 9090); 
 
   // Initialize sensors
-	LIS3DHConfig config;
-	config.setAccelMode(LIS3DH::RATE_100_HZ);
+  LIS3DHConfig config;
+  config.setAccelMode(LIS3DH::RATE_100_HZ);
 
-	bool setupSuccess = accel.setup(config);
-	Serial.printlnf("setupSuccess=%d", setupSuccess);
+  bool setupSuccess = accel.setup(config);
+  Serial.printlnf("setupSuccess=%d", setupSuccess);
 }
 
 // loop() runs over and over again, as quickly as it can execute.
@@ -32,20 +32,20 @@ void loop() {
   //data sample
   LIS3DHSample sample;
   if (millis() - lastPrintSample >= PRINT_SAMPLE_PERIOD) {
-		lastPrintSample = millis();
+	lastPrintSample = millis();
 
 		
-		if (accel.getSample(sample)) {
-			Serial.printlnf("%d,%d,%d", sample.x, sample.y, sample.z);
-		}
-		else {
-			Serial.println("no sample");
-		}
+	if (accel.getSample(sample)) {
+	    Serial.printlnf("%d,%d,%d", sample.x, sample.y, sample.z);
 	}
+	else {
+	    Serial.println("no sample");
+	}
+  }
     // displays avlues of x y and z on graphs on blynk
-    Blynk.virtualWrite(V1,sample.x);
-    Blynk.virtualWrite(V2,sample.y);
-    Blynk.virtualWrite(V3,sample.z);
+  Blynk.virtualWrite(V1,sample.x);
+  Blynk.virtualWrite(V2,sample.y);
+  Blynk.virtualWrite(V3,sample.z);
     
 
 }
